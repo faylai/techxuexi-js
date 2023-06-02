@@ -1153,7 +1153,7 @@ async function start() {
         }
         let taskProgress = null;
         let continueToDo = true;
-        let tasks = [false, false, false, false, false]
+        let tasks = [false, false, true, false]
         while (continueToDo) {
             //查询今天还有什么任务没做完
             console.log("检查今天还有什么任务没做完")
@@ -1194,11 +1194,11 @@ async function start() {
 
                 //检查每日答题
                 if (settings.ExamPractice && taskProgress[3].currentScore != taskProgress[3].dayMaxScore) {
-                    tasks[2] = false;//只要还有要做的，就当做没完成
+                    tasks[3] = false;//只要还有要做的，就当做没完成
                     console.log("3.做每日答题");
                     await doExamPractice();
                 } else {
-                    tasks[2] = true;
+                    tasks[3] = true;
                 }
                 tasks[3] = true
                 /*
@@ -1216,6 +1216,7 @@ async function start() {
                 }*/
 
                 //检查专项练习
+                /*
                 if (settings.ExamPaper && taskProgress[4].currentScore == 0) {
                     tasks[4] = false;//只要还有要做的，就当做没完成
                     console.log("5.做专项练习");
@@ -1227,8 +1228,9 @@ async function start() {
                 } else {
                     tasks[4] = true;
                 }
+                 */
 
-                if (tasks[0] && tasks[1] && tasks[2] && tasks[3] && tasks[4]) {
+                if (tasks[0] && tasks[1] && tasks[2] && tasks[3]) {
                     //如果检查都做完了，就不用继续了
                     continueToDo = false;
                 }
