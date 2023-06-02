@@ -1193,7 +1193,7 @@ async function start() {
                 }
 
                 //检查每日答题
-                if (settings.ExamPractice && taskProgress[5].currentScore != taskProgress[5].dayMaxScore) {
+                if (settings.ExamPractice && taskProgress[3].currentScore != taskProgress[3].dayMaxScore) {
                     tasks[2] = false;//只要还有要做的，就当做没完成
                     console.log("3.做每日答题");
                     await doExamPractice();
