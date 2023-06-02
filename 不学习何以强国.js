@@ -742,7 +742,7 @@ async function doingExam() {
     let shouldSaveAnswer = false;
     while (true) {
         //先等等再开始做题
-        await waitRandomBetween(2, 5);
+        await waitRandomBetween(3, 8);
         await doingPause();
         nextButton = await getNextButton();
         if (document.getElementsByClassName('nc_iconfont btn_slide')[0] != null) {
