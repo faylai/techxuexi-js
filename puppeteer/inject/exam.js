@@ -1,3 +1,6 @@
+/**
+ * 每日自动答题逻辑
+ */
 (function () {
     //获取答题按钮
     function getNextButton() {
