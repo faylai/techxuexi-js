@@ -26,7 +26,7 @@ export async function run(page, browser) {
         await loginPage.close()
         await sleep(1)
         // await page.reload()
-        await sleep(1)
+        // await sleep(1)
     }
 }
 
