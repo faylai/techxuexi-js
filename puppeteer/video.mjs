@@ -14,32 +14,50 @@ export async function run(page, browser) {
     openPage.click(hotBtSelector)
     await sleep(3)
     const listPage = await getActivePage(browser)
-    for (let counter = 0; counter < 2; counter++) {
+    for (let counter = 0; counter < 10; counter++) {
         await sleep(6)
         let tabs = await listPage.$$('.tab-item')
         await triggerClick(listPage, tabs[counter])
         await sleep(3)
         let videoLinks = await listPage.$$('div.textWrapper[data-link-target]')
-        for (let i = 0; i < Math.min(6, videoLinks.length); i++) {
-            let link = videoLinks[i]
-            await listPage.focus('body')
-            await triggerClick(listPage, link)
-            await sleep(3)
-            const videoPage = await getActivePage(browser)
-            await sleep(3)
-            try {
-                await scrollIntoViewIfNeeded(['video'], videoPage, 3000)
-            } catch (err) {
-                console.error(err)
+        if (videoLinks.length > 0) {
+            const randomIndex = Math.floor(Math.random() * 10000) % videoLinks.length
+            for (let i = randomIndex; i <= Math.max(0, Math.min(randomIndex, videoLinks.length - 1)); i++) {
+                let link = videoLinks[i]
+                await listPage.focus('body')
+                await triggerClick(listPage, link)
+                await sleep(3)
+                const videoPage = await getActivePage(browser)
+                await sleep(3)
+                let duration = 180
+                try {
+                    await videoPage.waitForSelector('video')
+                    await sleep(3)
+                    duration = await videoPage.evaluate(function () {
+                        return document.querySelector('video').player._duration
+                    })
+                    // 让视频滚动到中间
+                    await videoPage.evaluate(function () {
+                        document.documentElement.scrollTop = document.querySelector('video').offsetTop
+                        return null
+                    })
+                } catch (err) {
+                    console.error(err)
+                }
+                console.log('video duration is ', duration)
+                //最多看3分钟
+                await sleep(Math.min(duration, 180))
+                try {
+                    await videoPage.focus('body')
+                    await videoPage.close()
+                } catch (err) {
+                    console.log(err)
+                }
             }
-
-            await sleep(180)
-            await videoPage.focus('body')
-            await videoPage.close()
         }
     }
-
     await sleep(2)
+
     try {
         await listPage.close()
     } catch (err) {

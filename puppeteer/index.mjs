@@ -48,10 +48,7 @@ import {createPage, sleep} from './utils.mjs'
         }
     }
 
-    {
-        // 今日答题
-        // await runExam(page, browser)
-    }
+
     {
         //视频
         try {
@@ -73,6 +70,11 @@ import {createPage, sleep} from './utils.mjs'
         } catch (err) {
             console.error(err)
         }
+    }
+
+    {
+        // 今日答题
+        await runExam(page, browser)
     }
 
     //await browser.close();
