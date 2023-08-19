@@ -14,7 +14,7 @@ export async function run(page, browser) {
     openPage.click(hotBtSelector)
     await sleep(3)
     const listPage = await getActivePage(browser)
-    for (let counter = 0; counter < 10; counter++) {
+    for (let counter = 0; counter < 6; counter++) {
         await sleep(6)
         let tabs = await listPage.$$('.tab-item')
         await triggerClick(listPage, tabs[counter])

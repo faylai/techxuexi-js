@@ -28,7 +28,7 @@ export async function run(page, browser) {
         await articlePage.focus('body')
         await articlePage.close()
         counter++
-        if (counter > 10) {
+        if (counter > 6) {
             break
         }
     }
