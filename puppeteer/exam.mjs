@@ -25,7 +25,7 @@ export async function run(page, browser) {
     const examUrl = examPage.url()
     if (examUrl != myPointPageUrl) {
         await examPage.addScriptTag({path: path.join(__dirname, 'inject/exam.js')})
-        await sleep(3)
+        await sleep(70)
         await examPage.close()
     } else {
         console.log("点击我的积分后跳转:", examUrl)

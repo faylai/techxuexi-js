@@ -48,7 +48,16 @@ import {createPage, sleep} from './utils.mjs'
         }
     }
 
-
+    {
+        // 今日答题
+        try {
+            if (!isTaskDone(3)) {
+                await runExam(page, browser)
+            }
+        } catch (err) {
+            console.error(err)
+        }
+    }
 
 
 
@@ -75,16 +84,7 @@ import {createPage, sleep} from './utils.mjs'
         }
     }
 
-    {
-        // 今日答题
-        try {
-            if (!isTaskDone(3)) {
-                await runExam(page, browser)
-            }
-        } catch (err) {
-            console.error(err)
-        }
-    }
+
 
     //await browser.close();
 
