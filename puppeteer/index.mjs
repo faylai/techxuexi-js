@@ -50,6 +50,7 @@ import {createPage, sleep} from './utils.mjs'
 
     {
         // 今日答题
+        /*
         try {
             if (!isTaskDone(3)) {
                 await runExam(page, browser)
@@ -57,8 +58,9 @@ import {createPage, sleep} from './utils.mjs'
         } catch (err) {
             console.error(err)
         }
-    }
 
+         */
+    }
 
 
     {
@@ -85,8 +87,9 @@ import {createPage, sleep} from './utils.mjs'
     }
 
 
-
     //await browser.close();
+
+    console.log("学习完成")
 
 })().catch(err => {
     console.error(err);

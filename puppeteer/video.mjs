@@ -21,7 +21,7 @@ export async function run(page, browser) {
         await sleep(3)
         let videoLinks = await listPage.$$('div.textWrapper[data-link-target]')
         if (videoLinks.length > 0) {
-            const randomIndex = Math.floor(Math.random() * 10000) % videoLinks.length
+            const randomIndex = Math.floor(Math.random() * Math.random() * Math.random()*1000) % videoLinks.length
             for (let i = randomIndex; i <= Math.max(0, Math.min(randomIndex, videoLinks.length - 1)); i++) {
                 let link = videoLinks[i]
                 await listPage.focus('body')
