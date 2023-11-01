@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>wo iframe</title>
+</head>
+<body>
+<button id="bt1">random  change url hash</button>
+<button id="bt2">random  change url </button>
+
+<script>
+    (function () {
+        let url=location.href
+        document.getElementById('bt1').addEventListener('click', function () {
+           location.hash ='$'+ Math.random().toString()
+        })
+
+        document.getElementById('bt2').addEventListener('click', function () {
+            location.replace(url+'?_t='+ Math.random().toString())
+        })
+    })()
+</script>
+</body>
+</html>

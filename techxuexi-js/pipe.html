@@ -5,78 +5,28 @@
     <title>Title</title>
 </head>
 <body>
-<svg id="svg" width="300px" height="300px"></svg>
-<canvas id="pieChart" width="300" height="300"></canvas>
+
+
+<iframe src="iframe.html" id="iframe"></iframe>
 <script>
     (function () {
-        ;(function() {
-            const canvas = document.getElementById('pieChart');
-            const ctx = canvas.getContext('2d');
-            const data = [
-                {label: 'A', value: 30, color: '#ff5733'},
-                {label: 'B', value: 20, color: '#33aaff'},
-                {label: 'C', value: 50, color: '#33cc33'},
-            ];
-            const totalValue = data.reduce((sum, item) => sum + item.value, 0);
-            let startAngle = 0;
+        let iframe=document.getElementById('iframe').contentWindow
+        iframe.addEventListener("hashchange", function (){
+            console.log("hash change:",iframe.location.hash)
+        });
+        let currentURL=iframe.location.href
 
-            data.forEach(item => {
-                const sliceAngle = (item.value / totalValue) * (Math.PI * 2);
-
-                ctx.beginPath();
-                ctx.moveTo(canvas.width / 2, canvas.height / 2);
-                ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 3, startAngle, startAngle + sliceAngle);
-                ctx.closePath();
-
-                ctx.fillStyle = item.color;
-                ctx.fill();
-
-                startAngle += sliceAngle;
-            });
-        })()
-
-        ;(function () {
-            const svg = document.getElementById('svg');
-            const centerX = svg.width.baseVal.value / 2;
-            const centerY = svg.height.baseVal.value / 2;
-            const radius = svg.width.baseVal.value / 3;
-            const data = [
-                {label: 'A', value: 30, color: '#ff5733'},
-                {label: 'B', value: 20, color: '#33aaff'},
-                {label: 'C', value: 50, color: '#33cc33'},
-            ];
-            const totalValue = data.reduce((sum, item) => sum + item.value, 0);
-            let startAngle = 0;
-            data.forEach(item => {
-                const sliceAngle = (item.value / totalValue) * 360;
-                const endAngle = startAngle + sliceAngle;
-                const startX = centerX + radius * Math.cos(startAngle * Math.PI / 180);
-                const startY = centerY + radius * Math.sin(startAngle * Math.PI / 180);
-                const endX = centerX + radius * Math.cos(endAngle * Math.PI / 180);
-                const endY = centerY + radius * Math.sin(endAngle * Math.PI / 180);
-
-                const largeArcFlag = sliceAngle <= 180 ? 0 : 1;
-
-                const pathData = [
-                    `M ${centerX},${centerY}`,
-                    `L ${startX},${startY}`,
-                    `A ${radius},${radius} 0 ${largeArcFlag},1 ${endX},${endY}`,
-                    `Z`
-                ].join(' ');
-
-                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                path.setAttribute('d', pathData);
-                path.setAttribute('fill', item.color);
-
-                svg.appendChild(path);
-
-                startAngle = endAngle;
-            });
-        })()
-
-        ;(function (){})();(function (){})()
-
+        document.getElementById('iframe').addEventListener('load' ,function () {
+            const newURL = iframe.location.href;
+            if (currentURL !== newURL) {
+                console.log(`URL changed from "${currentURL}" to "${newURL}"`);
+                // 在这里执行你的逻辑，响应 URL 变化
+                currentURL = newURL;
+            }
+        });
     })()
 </script>
+
+
 </body>
 </html>
